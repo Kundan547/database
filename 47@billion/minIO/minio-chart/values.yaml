@@ -1,0 +1,30 @@
+replicaCount: 4
+
+image:
+  repository: minio/minio
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 9000
+
+resources:
+  requests:
+    memory: "256Mi"
+    cpu: "250m"
+  limits:
+    memory: "512Mi"
+    cpu: "500m"
+
+env:
+  - name: MINIO_ROOT_USER
+    value: "admin"
+  - name: MINIO_ROOT_PASSWORD
+    value: "password"
+
+persistence:
+  enabled: true
+  size: 10Gi
+  accessMode: ReadWriteOnce
+  storageClass: ""
